@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<body>
+  <h3>Email:</h3>
+  <form onsubmit="return validateEmail()">
+    <label for="email">Enter your email:</label><br/>
+    <input type="text" id="email" name="email" placeholder="example@example.com" /><br/><br/>
+    <input type="submit" value="Submit" />
+  </form>
+  <div id="emailFeedback"></div>
+  <div id="emailSuccess"></div>
+</body>
+</html>
+
+<head>
+  <title>Email Validation</title>
+  <style>
+    #emailFeedback {
+      color: red;
+      margin-top: 10px;
+    }
+    #emailSuccess {
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function validateEmail() {
+      const emailInput = document.getElementById("email").value.trim();
+      const feedback = document.getElementById("emailFeedback");
+      const success = document.getElementById("emailSuccess");
+
+      feedback.textContent = "";
+      success.textContent = "";
+
+      if (emailInput === "") {
+        feedback.textContent = "Please enter your email address.";
+        return false;
+      }
+
+      
+      if (!emailInput.includes("@") || !emailInput.includes(".")) {
+        feedback.textContent = "Please enter a valid email like sample@example.com.";
+        return false;
+      }
+
+      
+      const simpleEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!simpleEmailPattern.test(emailInput)) {
+        feedback.textContent = "Email format is incorrect.";
+        return false;
+      }
+
+      success.textContent = "✅ Email is valid!";
+      return true;
+    }
+  </script>
+
+
+</html>

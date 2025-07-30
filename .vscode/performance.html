@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head></head>
+
+<body>
+  <h3>Name:</h3>
+  <form onsubmit="return validateName()">
+    <label for="name">Enter your name:</label><br/>
+    <input type="text" id="name" name="name" /><br/><br/>
+    <input type="submit" value="Submit" />
+  </form>
+  <div id="feedback"></div>
+  <div id="success"></div>
+</body>
+</html>
+
+
+<html>
+<head>
+  <title>Name Validation</title>
+  <style>
+    #feedback {
+      color: red;
+      margin-top: 10px;
+    }
+    #success {
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function validateName() {
+      const nameInput = document.getElementById("name").value.trim();
+      const feedback = document.getElementById("feedback");
+      const success = document.getElementById("success");
+
+      
+      feedback.textContent = "";
+      success.textContent = "";
+
+      
+      if (nameInput === "") {
+        feedback.textContent = "Please enter your name.";
+        return false;
+      }
+
+      
+      const words = nameInput.split(" ");
+      if (words.length < 2) {
+        feedback.textContent = "Please enter at least two words.";
+        return false;
+      }
+
+      
+      const firstChar = nameInput.charAt(0);
+      if (!/^[a-zA-Z]$/.test(firstChar)) {
+        feedback.textContent = "Name must start with a letter.";
+        return false;
+      }
+
+      
+      const allowedPattern = /^[a-zA-Z.\-\s]+$/;
+      if (!allowedPattern.test(nameInput)) {
+        feedback.textContent = "Only letters, dot (.), dash (-), and spaces are allowed.";
+        return false;
+      }
+
+      
+      success.textContent = "✅ Name is valid!";
+      return true;
+    }
+  </script>
+</head>
